@@ -1,4 +1,6 @@
 class Transaction < ActiveRecord::Base
+	
+	belongs_to :user
 
 	validates_presence_of :name, :type_of, :amount, :user_id, :transaction_date
 	validates :amount, :numericality => {:other_than => 0.00}
