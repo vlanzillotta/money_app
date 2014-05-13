@@ -1,1 +1,19 @@
-See your transactions here
+
+
+<%=@current_user.email %>
+
+<table>
+<% @transaction.each do |transaction| %>
+	<tr class="<%=transaction.type_of%>">
+		<td>
+			<%= transaction.transaction_date %>
+		<td>
+		<td>
+			<%= transaction.name %>
+		<td>
+		<td>
+			<%= transaction.amount %>
+		<td>
+	</tr>
+<% end %>
+</table>
