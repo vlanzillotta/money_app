@@ -11,15 +11,13 @@ describe "Transactions" , :type => :feature do
       expect(page).to have_content('Sign in')
     end
 
-	let(:user) {User.find(1)}
+	  let(:user) {User.create(email:"vlanzillotta@gmail.com", password: "password", password_confirmation: "password")}
     
     it "when logged in" do
-    	# sign_in user
-    	# visit '/transactions'
-     #    expect(page).to have_content('Here are your transactions!')
+    	sign_in user
+      
+    	visit transactions_path
+      expect(page).to have_content('Here are your transactions!')
     end
-
-
-
   end
 end

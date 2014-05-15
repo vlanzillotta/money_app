@@ -1,4 +1,5 @@
 require 'spec_helper'
+include Devise::TestHelpers
 
 # Specs in this file have access to a helper object that includes
 # the UsersHelper. For example:
@@ -11,4 +12,11 @@ require 'spec_helper'
 #   end
 # end
 describe UsersHelper do
+end
+
+def sign_in (user)
+	visit new_user_session_path
+	fill_in "Email",    with: user.email
+    fill_in "Password", with: user.password
+    click_button "Sign in"
 end
