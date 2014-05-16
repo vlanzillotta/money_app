@@ -20,3 +20,30 @@ def sign_in (user)
     fill_in "Password", with: user.password
     click_button "Sign in"
 end
+
+
+
+def populate_transactions (user)
+
+	user.transactions.create(name: "first", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "second", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "third", amount: 400 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "fourth", amount: 100 , transaction_date: "2015-05-16")
+	user.transactions.create(name: "fifth", amount: -100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "sixth", amount: 100 , transaction_date: "2015-05-16")
+	user.transactions.create(name: "seventh", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "eighth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "ninth", amount: 700 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "tenth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "eleventh", amount: -100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "twelth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "thirsteen", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "foutreen", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "fifteenth", amount: -100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "sixteenth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "seventeenth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "eighteenth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "ninteenth", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "twenty", amount: 100 , transaction_date: "2014-05-16")
+	
+end
