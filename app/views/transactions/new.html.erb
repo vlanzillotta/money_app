@@ -1,0 +1,13 @@
+New Transaction
+<%= form_for @transaction, url: {action: "create"}, html: {} do |transaction| %>
+	<%= transaction.label :name %>
+	<%= transaction.text_field :name %>
+
+	<%= transaction.label :amount %>
+	<%= transaction.text_field :amount %>
+
+	<%= transaction.label :transaction_date %>
+	<%= transaction.text_field :transaction_date %>
+
+	 <%= transaction.submit "submit", class: "btn btn-large btn-primary" %>
+<% end %>

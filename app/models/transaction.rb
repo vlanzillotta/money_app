@@ -7,11 +7,14 @@ class Transaction < ActiveRecord::Base
 
 	def amount=(value)
 			
+			value = value.to_i
 			if value == ''
 				value = 0
 			end
 
 			write_attribute(:amount, value)
+			puts "the amount value is #{value}"
+			puts "it is a  #{value.class}"
 			value > 0 ? write_attribute(:type_of, "credit") :  write_attribute(:type_of, "expense")
 			
 	end

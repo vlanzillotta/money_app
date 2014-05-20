@@ -1,7 +1,7 @@
 require 'spec_helper'
 include Devise::TestHelpers
 
-describe "Transactions" , :type => :feature do
+describe "Transactions - " , :type => :feature do
   
   describe "View transactions" do
     
@@ -13,13 +13,39 @@ describe "Transactions" , :type => :feature do
 
 	  let(:user) { FactoryGirl.create(:user) }
     
+
     it "when logged in" do
 
       populate_transactions user
     	sign_in user
-      pp user.transactions[3]
     	visit transactions_path
       expect(page).to have_content('Here are your transactions!')
     end
+  end
+
+
+  describe "creating new transaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      populate_transactions user
+      visit new_transaction_path
+      fill_in  "transaction_name",  with: "initial transaction"
+      fill_in  "transaction_amount",  with: 100
+      fill_in  "transaction_transaction_date",  with: "2014-05-20"
+
+      # user.transaction.create(name: "first", amount: 100, transaction_date: "2014-05-20")
+
+      
+    }
+
+    it "should add a transaction" do
+
+      puts "#{user.transactions.count}"
+      expect { click_button "submit" }.to change(user.transactions, :count)
+      puts "#{user.transactions}"
+    
+    end
+  
   end
 end

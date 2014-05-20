@@ -14,10 +14,24 @@ class TransactionsController < ApplicationController
 	end
 
 	def new
-		
+		@transaction = Transaction.new
 	end
 
 	def create
+		@current_user = current_user
 		
+		
+		@current_user.transactions.create(transaction_params)
+		# @current_user.transactions.save
+
+		redirect_to transactions_path
+
+	end
+
+
+	private
+
+	def transaction_params
+		params.require(:transaction).permit(:name, :amount, :transaction_date)
 	end
 end
