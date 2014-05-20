@@ -21,6 +21,7 @@ describe "Transactions - " , :type => :feature do
     	visit transactions_path
       expect(page).to have_content('Here are your transactions!')
     end
+    
   end
 
 
@@ -33,17 +34,11 @@ describe "Transactions - " , :type => :feature do
       fill_in  "transaction_name",  with: "initial transaction"
       fill_in  "transaction_amount",  with: 100
       fill_in  "transaction_transaction_date",  with: "2014-05-20"
-
-      # user.transaction.create(name: "first", amount: 100, transaction_date: "2014-05-20")
-
-      
     }
 
     it "should add a transaction" do
 
-      puts "#{user.transactions.count}"
       expect { click_button "submit" }.to change(user.transactions, :count)
-      puts "#{user.transactions}"
     
     end
   
