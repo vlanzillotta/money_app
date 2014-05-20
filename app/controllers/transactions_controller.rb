@@ -4,12 +4,7 @@ class TransactionsController < ApplicationController
 	def index
 		@current_user = current_user
 		@current_user_id = @current_user.id
-
-		
-
-
 		@transaction  = @current_user.transactions
-
 
 	end
 
@@ -19,11 +14,7 @@ class TransactionsController < ApplicationController
 
 	def create
 		@current_user = current_user
-		
-		
 		@current_user.transactions.create(transaction_params)
-		# @current_user.transactions.save
-
 		redirect_to transactions_path
 
 	end

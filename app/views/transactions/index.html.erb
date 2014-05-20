@@ -7,6 +7,7 @@ Here are your transactions!
 		<th>Date</th>
 		<th>Transaction</th>
 		<th>Amount</th>
+		<th>Type</th>
 	</tr>
 <% @transaction.each do |transaction| %>
 	<tr class="<%=transaction.type_of%>">
@@ -18,6 +19,9 @@ Here are your transactions!
 		</td>
 		<td>
 			<%= transaction.amount %>
+		</td>
+		<td>
+			<%= transaction.type_of %>
 		</td>
 	</tr>
 <% end %>
