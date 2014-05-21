@@ -13,19 +13,23 @@ class Transaction < ActiveRecord::Base
 			end
 
 			write_attribute(:amount, value)
-			puts "the amount value is #{value}"
-			puts "it is a  #{value.class}"
+			
 			value > 0 ? write_attribute(:type_of, "credit") :  write_attribute(:type_of, "expense")
 			
 	end
 
 
 	def transaction_date=(value)
+
+		begin
+		   Date.parse(value)
+		rescue ArgumentError
+		  value = ""
+		end
 		
 		write_attribute(:transaction_date, value);
 		if value != ""
 			value = Date.parse value
-			puts value.class
 			if value > Date.today
 				write_attribute(:type_of, "future transaction") 
 			end

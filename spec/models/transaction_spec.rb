@@ -21,6 +21,7 @@ describe Transaction do
 
 
 
+
 	# verifying fields exist
 
 	describe "without name value" do
@@ -30,6 +31,11 @@ describe Transaction do
 
 	describe "without transaction date" do
 		before {@trans.transaction_date = ""}
+		it {should_not be_valid}
+	end
+
+	describe "with invalid transaction date" do
+		before {@trans.transaction_date = "2014-95-21"}
 		it {should_not be_valid}
 	end
 
