@@ -8,27 +8,27 @@
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      
-     <!--  <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form> -->
-      <%= form_for(:user, :url => session_path(:user), :html => {:class => "navbar-form navbar-right"}) do |f| %>
-        <div class="form-group">
 
-        <%= f.text_field :email , :value => "email" %>
-        <%= f.password_field :password , :value => "password" %> 
-        <%= f.submit 'Sign in' %><br />
-        <%= link_to "Forgot your password?", new_password_path(:user) %>
-        </div>
-      <% end %>
       <ul class="nav navbar-nav navbar-right">
-        <li> <%= link_to 'Log out', destroy_user_session_path , :method => :delete %></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <%= form_for(:user, :url => session_path(:user), :html => {:class => "navbar-form"}) do |f| %>
+
+            <li> <%= f.text_field :email , :value => "email" %></li>
+            <li><%= f.password_field :password , :value => "password" %> </li>
+            <li><%= f.submit 'Sign in' %></li>
+            <li><%= link_to "Forgot your password?", new_password_path(:user) %></li>
+            
+          
+            <% end %>
+            <li><%= link_to 'Log out', destroy_user_session_path , :method => :delete %></li>
+
+        </ul>
+        </li>
       </ul>
 
-    </div><!-- /.navbar-collapse -->
+    </div><!-- /.navbar-collapse --> 
   </div><!-- /.container-fluid -->
 </nav>
 
