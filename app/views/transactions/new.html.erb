@@ -1,4 +1,6 @@
+
 New Transaction
+
 <%= form_for @transaction, url: {action: "create"}, html: {} do |transaction| %>
 	<%= transaction.label :name %>
 	<%= transaction.text_field :name %>

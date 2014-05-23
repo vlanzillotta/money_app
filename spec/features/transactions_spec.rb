@@ -43,4 +43,24 @@ describe "Transactions - " , :type => :feature do
     end
   
   end
+
+
+  describe "creating a new transaction from the transaction index page" do
+
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      populate_transactions user
+      visit transactions_path
+      click_link  "Create New Transaction"
+    }
+    it "should display the transaction creation screen" do 
+      expect(page).to have_content("New Transaction")
+    end
+
+  end
+
+
+
+
 end
