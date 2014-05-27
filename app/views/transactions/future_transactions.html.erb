@@ -1,0 +1,23 @@
+Here are your Future transactions!
+<table class="table table-striped table-bordered table-condensed">
+	<tr>
+		<th>Date</th>
+		<th>Transaction</th>
+		<th>Amount</th>
+		
+	</tr>
+<% @transaction.each do |transaction| %>
+	<tr class="<%=transaction.type_of%>">
+		<td>
+			<%= transaction.transaction_date %>
+		</td>
+		<td>
+			<%= transaction.name %>
+		</td>
+		<td>
+			<%= transaction.amount %>
+		</td>
+
+	</tr>
+<% end %>
+</table>

@@ -19,10 +19,17 @@ class TransactionsController < ApplicationController
 
 	end
 
+	def future_transactions
+		@current_user = current_user
+		@transaction  = @current_user.transactions.where type_of: "future transaction" 
 
+	end
 	private
 
-	def transaction_params
-		params.require(:transaction).permit(:name, :amount, :transaction_date)
-	end
+		def transaction_params
+			params.require(:transaction).permit(:name, :amount, :transaction_date)
+		end
+
+
+
 end

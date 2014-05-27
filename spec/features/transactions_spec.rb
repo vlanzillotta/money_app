@@ -60,6 +60,19 @@ describe "Transactions - " , :type => :feature do
 
   end
 
+  describe "view all future trsnsactions" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      populate_transactions user
+      visit future_transactions_path
+      
+    }
+
+    it "should display a table of future transactions" do
+      expect(page).to have_content("Future transactions")
+    end
+  end
 
 
 
