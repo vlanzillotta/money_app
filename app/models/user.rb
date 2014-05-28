@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :transactions
+
+  def balance
+  	transactions.sum("amount").to_i
+  end
 end
