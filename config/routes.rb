@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
+
+  get 'balance' => 'users#balance', as: :balance
   resources :users
 
   get 'transactions/future' => 'transactions#future_transactions', as: :future_transactions
