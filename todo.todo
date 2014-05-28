@@ -4,7 +4,7 @@ Main features
 Transactions
 ------------------------------
 
- ☐ viewing current effective balance
+ ✔ viewing current effective balance @done (14-05-27 22:32)
  ☐ Add repeating future expenses
  ☐ Limit future transactions to only 2 weeks after current date
  ☐ Change future transactions to past transactions after the date has passed
