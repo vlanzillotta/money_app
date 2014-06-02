@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :transactions
 
+  validates_presence_of :name
+
   def balance
   	transactions.sum("amount").to_i
   end
