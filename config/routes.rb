@@ -7,11 +7,13 @@ Rails.application.routes.draw do
   get 'transactions/future' => 'transactions#future_transactions', as: :future_transactions
   resources :transactions
 
+  get 'welcome' => 'static_pages#welcome', as: :welcome
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'users#index'
+  root 'static_pages#welcome'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
