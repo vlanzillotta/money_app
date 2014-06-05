@@ -1,18 +1,25 @@
 Rails.application.routes.draw do
   devise_for :users
 
+  #User routes
   get 'balance' => 'users#balance', as: :balance
   resources :users
 
+  #transaction routes
   get 'transactions/future' => 'transactions#future_transactions', as: :future_transactions
   resources :transactions
 
+  #static pages routes
   get 'welcome' => 'static_pages#welcome', as: :welcome
 
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
 
-  # You can have the root of your site routed with "root"
+  #root routes (authenticated vs not)
+  authenticated :user do
+    root :to => "transactions#index", :as => "authenticated_root"
+    # Rails 4 users must specify the 'as' option to give it a unique name
+    # root :to => "main#dashboard", :as => "authenticated_root"
+  end
+
   root 'static_pages#welcome'
 
   # Example of regular route:
