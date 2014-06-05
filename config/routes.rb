@@ -16,8 +16,6 @@ Rails.application.routes.draw do
   #root routes (authenticated vs not)
   authenticated :user do
     root :to => "transactions#index", :as => "authenticated_root"
-    # Rails 4 users must specify the 'as' option to give it a unique name
-    # root :to => "main#dashboard", :as => "authenticated_root"
   end
 
   root 'static_pages#welcome'
