@@ -19,7 +19,7 @@ describe "Transactions - " , :type => :feature do
       populate_transactions user
     	sign_in user
     	visit transactions_path
-      expect(page).to have_content('Here are your transactions!')
+      expect(page).to have_content('Here are your transactions')
     end
     
   end

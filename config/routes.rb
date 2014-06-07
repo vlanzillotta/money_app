@@ -3,6 +3,7 @@ Rails.application.routes.draw do
 
   #User routes
   get 'balance' => 'users#balance', as: :balance
+  get 'dashboard' => 'users#dashboard', as: :dashboard
   resources :users
 
   #transaction routes
