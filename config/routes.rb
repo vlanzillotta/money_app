@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   #root routes (authenticated vs not)
   authenticated :user do
-    root :to => "transactions#index", :as => "authenticated_root"
+    root :to => "users#dashboard", :as => "authenticated_root"
   end
 
   root 'static_pages#welcome'
