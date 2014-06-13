@@ -24,6 +24,11 @@ class TransactionsController < ApplicationController
 		@transaction  = @current_user.transactions.where type_of: "future transaction" 
 
 	end
+	def destroy
+		Transaction.find(params[:id]).destroy
+		redirect_to :back
+		
+	end
 	private
 
 		def transaction_params

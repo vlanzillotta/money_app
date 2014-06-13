@@ -44,6 +44,40 @@ describe "Transactions - " , :type => :feature do
   
   end
 
+  describe "deleting a trsnaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    
+
+    describe "from index view" do
+      before {
+        sign_in user
+        populate_transactions user
+        visit transactions_path
+        
+      }
+
+      it "clicking delete on a transaction " do
+         expect { click_link "delete_#{user.transactions.first.id}" }.to change(user.transactions, :first)
+      end
+
+    end
+
+    describe "from dashboard view" do
+      before {
+        sign_in user
+        populate_transactions user
+        visit dashboard_path
+        
+      }
+      it "clicking delete on a transaction " do
+         expect { click_link "delete_#{user.transactions.first.id}" }.to change(user.transactions, :first)
+      end
+
+    end
+
+
+  end
+
 
   describe "creating a new transaction from the transaction index page" do
 

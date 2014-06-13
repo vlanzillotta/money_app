@@ -49,6 +49,9 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 						<td>
 							<%= transaction.type_of %>
 						</td>
+						<td>
+							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
+						</td>
 					</tr>
 				<% end %>
 				</table>
@@ -82,6 +85,9 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 						<td>
 							<%= transaction.amount %>
 						</td>
+						<td>
+							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
+						</td>
 						
 					</tr>
 				<% end %>
@@ -113,6 +119,9 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 						</td>
 						<td>
 							<%= transaction.amount %>
+						</td>
+						<td>
+							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
 						</td>
 						
 					</tr>

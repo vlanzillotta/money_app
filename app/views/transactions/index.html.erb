@@ -3,7 +3,7 @@
 <%=@current_user.email %>
 
 <div class="row">
-	<div class="col-md-3 col-md-offset-1">
+	<div class="col-md ">
 		<div class="panel panel-primary">
 			
 			<div class="panel-heading">
@@ -17,6 +17,7 @@
 						<th>Transaction</th>
 						<th>Amount</th>
 						<th>Type</th>
+						<th></th>
 					</tr>
 				<% @transaction.each do |transaction| %>
 					<tr class="<%=transaction.type_of%>">
@@ -31,6 +32,9 @@
 						</td>
 						<td>
 							<%= transaction.type_of %>
+						</td>
+						<td>
+							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
 						</td>
 					</tr>
 				<% end %>
