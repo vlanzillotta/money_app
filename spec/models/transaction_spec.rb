@@ -31,12 +31,15 @@ describe Transaction do
 
 	describe "without transaction date" do
 		before {@trans.transaction_date = ""}
-		it {should_not be_valid}
+		it {should be_valid}
+		its(:type_of){should eq("putaway transaction")}
 	end
 
 	describe "with invalid transaction date" do
-		before {@trans.transaction_date = "2014-95-21"}
-		it {should_not be_valid}
+		before {@trans.transaction_date = "2014-13-21"}
+		# it {should_not be_valid}
+		its(:transaction_date){should eq(nil)}
+		its(:type_of){should eq("putaway transaction")}
 	end
 
 

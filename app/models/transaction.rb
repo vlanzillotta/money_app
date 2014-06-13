@@ -2,7 +2,7 @@ class Transaction < ActiveRecord::Base
 	
 	belongs_to :user
 
-	validates_presence_of :name, :type_of, :amount, :user_id, :transaction_date
+	validates_presence_of :name, :type_of, :amount, :user_id
 	validates :amount, :numericality => {:other_than => 0.00}
 
 	def amount=(value)
@@ -21,18 +21,27 @@ class Transaction < ActiveRecord::Base
 
 	def transaction_date=(value)
 
-		begin
-		   Date.parse(value)
-		rescue ArgumentError
-		  value = ""
-		end
-		
-		write_attribute(:transaction_date, value);
-		if value != ""
-			value = Date.parse value
-			if value > Date.today
-				write_attribute(:type_of, "future transaction") 
+		# if value == ""
+		# 	write_attribute(:transaction_date, value);
+		# 	write_attribute(:type_of, "putaway transaction") 
+		# else
+			
+			begin
+			   Date.parse(value)
+			rescue ArgumentError
+			  value = ""
+			  write_attribute(:transaction_date, value);
+			  write_attribute(:type_of, "putaway transaction") 
 			end
-		end
+			
+			if value != ""
+				write_attribute(:transaction_date, value);
+				value = Date.parse value
+				if value > Date.today
+					write_attribute(:type_of, "future transaction") 
+				end
+			end
+			
+		# end	
 	end
 end
