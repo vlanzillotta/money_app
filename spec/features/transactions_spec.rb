@@ -107,6 +107,35 @@ describe "Transactions - " , :type => :feature do
   end
 
 
+  describe "commiting a transaction" do
+    
+
+
+    let(:user) { FactoryGirl.create(:user) }
+    let(:transaction_id) { user.transactions.where(:type_of => "future transaction").first.id}
+    
+
+    before {
+      sign_in user
+      populate_transactions user
+      visit future_transactions_path
+    }
+    
+    it "clicking commit on the first future transaction " do
+
+      puts Transaction.find(transaction_id).transaction_date
+      expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).transaction_date}
+     
+      # puts Transaction.find(transaction_id).transaction_date
+      # click_link "commit_#{transaction_id}" 
+      # puts Transaction.find(transaction_id).transaction_date
+      
+    end
+
+
+  end
+
+
   describe "creating a new transaction from the transaction index page" do
 
     let(:user) { FactoryGirl.create(:user) }

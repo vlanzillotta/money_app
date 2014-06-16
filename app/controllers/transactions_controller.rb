@@ -17,6 +17,14 @@ class TransactionsController < ApplicationController
 		redirect_to dashboard_path
 	end
 
+	def commit
+
+		@transaction = Transaction.find(params[:id])
+		@transaction.transaction_date = Time.now.to_s
+		@transaction.save
+		redirect_to :back
+	end
+
 	def new
 		@transaction = Transaction.new
 	end

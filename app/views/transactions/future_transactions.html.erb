@@ -17,6 +17,11 @@ Here are your Future transactions!
 		<td>
 			<%= transaction.amount %>
 		</td>
+		<td>
+
+			<%= link_to("[COMMIT]", {controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") %>
+
+		</td>
 
 	</tr>
 <% end %>

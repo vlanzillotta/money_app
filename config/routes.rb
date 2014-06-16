@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   #transaction routes
   get 'transactions/future' => 'transactions#future_transactions', as: :future_transactions
+  get 'transactions/:id/commit' => 'transactions#commit', as: :transaction_commit
   resources :transactions
 
   #static pages routes
