@@ -121,18 +121,12 @@ describe "Transactions - " , :type => :feature do
       visit future_transactions_path
     }
     
-    it "clicking commit on the first future transaction " do
-
-      puts Transaction.find(transaction_id).transaction_date
+    it "will chnage the date to todays date " do
       expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).transaction_date}
-     
-      # puts Transaction.find(transaction_id).transaction_date
-      # click_link "commit_#{transaction_id}" 
-      # puts Transaction.find(transaction_id).transaction_date
-      
     end
-
-
+    it "will chnage the transaction type " do
+      # expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).type_of}
+    end
   end
 
 
