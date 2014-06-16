@@ -51,6 +51,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 						</td>
 						<td>
 							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
+							<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
 						</td>
 					</tr>
 				<% end %>
@@ -87,6 +88,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 						</td>
 						<td>
 							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
+							<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
 						</td>
 						
 					</tr>
@@ -122,6 +124,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 						</td>
 						<td>
 							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
+							<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
 						</td>
 						
 					</tr>

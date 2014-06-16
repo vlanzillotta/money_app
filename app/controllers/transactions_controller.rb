@@ -8,6 +8,15 @@ class TransactionsController < ApplicationController
 
 	end
 
+	def edit
+		@transaction = Transaction.find(params[:id])
+	end
+
+	def update
+		Transaction.find(params[:id]).update(transaction_params)
+		redirect_to dashboard_path
+	end
+
 	def new
 		@transaction = Transaction.new
 	end

@@ -78,6 +78,34 @@ describe "Transactions - " , :type => :feature do
 
   end
 
+  describe "editing a transaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      populate_transactions user
+    }
+    describe "from the transaction screen" do
+      it "click edit button" do
+        visit transactions_path
+        click_link "edit_#{user.transactions.first.id}"
+
+        expect(page).to have_content("edit transaction");
+      end
+        
+    end
+
+    describe "from the transaction screen" do
+      it "click edit button" do
+        visit dashboard_path
+        click_link "edit_#{user.transactions.first.id}"
+
+        expect(page).to have_content("edit transaction");
+      end
+    end
+
+
+  end
+
 
   describe "creating a new transaction from the transaction index page" do
 
