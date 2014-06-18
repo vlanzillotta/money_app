@@ -16,6 +16,7 @@ class User < ActiveRecord::Base
   	transactions.where(:type_of => "future transaction").sum(:amount).to_i
   end
   def bank_balance
-  	transactions.where(" type_of == 'credit' or type_of == 'expense'").sum(:amount).to_i
+  	transactions.where(type_of: ["credit", "expense"]).sum(:amount).to_i
+    
   end
 end
