@@ -168,6 +168,7 @@ PLATFORMS
   x86-mingw32
 
 DEPENDENCIES
+  bcrypt
   bootstrap-sass
   capybara
   coffee-rails (~> 4.0.0)

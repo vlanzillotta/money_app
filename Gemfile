@@ -21,6 +21,7 @@ gem 'tzinfo-data'
 
 
 gem 'devise'
+gem 'bcrypt'
 gem 'rspec-rails'
 gem 'bootstrap-sass'
 
