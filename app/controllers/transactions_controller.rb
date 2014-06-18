@@ -21,6 +21,9 @@ class TransactionsController < ApplicationController
 
 		@transaction = Transaction.find(params[:id])
 		@transaction.transaction_date = Time.now.to_s
+
+		@transaction.type_of = @transaction.amount > 0 ? "credit" : "expense"
+
 		@transaction.save
 		redirect_to :back
 	end
@@ -41,6 +44,12 @@ class TransactionsController < ApplicationController
 		@transaction  = @current_user.transactions.where type_of: "future transaction" 
 
 	end
+	def putaway_transactions
+		@current_user = current_user
+		@transaction  = @current_user.transactions.where type_of: "putaway transaction" 
+
+	end
+
 	def destroy
 		Transaction.find(params[:id]).destroy
 		redirect_to :back

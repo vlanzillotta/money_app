@@ -125,7 +125,7 @@ describe "Transactions - " , :type => :feature do
       expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).transaction_date}
     end
     it "will chnage the transaction type " do
-      # expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).type_of}
+      expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).type_of}
     end
   end
 
@@ -156,6 +156,20 @@ describe "Transactions - " , :type => :feature do
 
     it "should display a table of future transactions" do
       expect(page).to have_content("Future transactions")
+    end
+  end
+
+  describe "view all putaway trsnsactions" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      populate_transactions user
+      visit putaway_transactions_path
+      
+    }
+
+    it "should display a table of putaway transactions" do
+      expect(page).to have_content("Putaway transactions")
     end
   end
 
