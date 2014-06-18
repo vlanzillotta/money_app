@@ -49,6 +49,11 @@ class TransactionsController < ApplicationController
 		@transaction  = @current_user.transactions.where type_of: "putaway transaction" 
 
 	end
+	def recent_transactions
+		@current_user = current_user
+		@transaction  = @current_user.transactions.where(' type_of == "credit" or type_of == "expense" ')
+
+	end
 
 	def destroy
 		Transaction.find(params[:id]).destroy

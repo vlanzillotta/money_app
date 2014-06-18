@@ -173,6 +173,19 @@ describe "Transactions - " , :type => :feature do
     end
   end
 
+  describe "view all recent trsnsactions" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      populate_transactions user
+      visit recent_transactions_path
+      
+    }
+
+    it "should display a table of recent transactions" do
+      expect(page).to have_content("Recent transactions")
+    end
+  end
 
 
 end

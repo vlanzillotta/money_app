@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   #transaction routes
   get 'transactions/future' => 'transactions#future_transactions', as: :future_transactions
   get 'transactions/putaway' => 'transactions#putaway_transactions', as: :putaway_transactions
+  get 'transactions/recent' => 'transactions#recent_transactions', as: :recent_transactions
+
   get 'transactions/:id/commit' => 'transactions#commit', as: :transaction_commit
   resources :transactions
 
