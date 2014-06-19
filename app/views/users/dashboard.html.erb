@@ -50,8 +50,15 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 							<%= transaction.type_of %>
 						</td>
 						<td>
-							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
-							<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
+							
+							
+							<%= link_to(transaction , :method => :delete, :id => "delete_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-trash"></span>
+							<% end %>
+
+							<%= link_to(edit_transaction_path(transaction) , :id => "edit_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-edit"></span>
+							<% end %>
 
 						</td>
 					</tr>
@@ -88,10 +95,16 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 							<%= transaction.amount %>
 						</td>
 						<td>
-							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
-							<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
-							<%= link_to("[COMMIT]", {controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") %>
+							<%= link_to(transaction , :method => :delete, :id => "delete_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-trash"></span>
+							<% end %>
 
+							<%= link_to(edit_transaction_path(transaction) , :id => "edit_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-edit"></span>
+							<% end %>
+							<%= link_to({controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-record"></span>
+							<% end %>
 						</td>
 						
 					</tr>
@@ -126,10 +139,16 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 							<%= transaction.amount %>
 						</td>
 						<td>
-							<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
-							<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
-							<%= link_to("[COMMIT]", {controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") %>
+							<%= link_to(transaction , :method => :delete, :id => "delete_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-trash"></span>
+							<% end %>
 
+							<%= link_to(edit_transaction_path(transaction) , :id => "edit_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-edit"></span>
+							<% end %>
+							<%= link_to({controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") do %>
+							 <span class="glyphicon glyphicon-record"></span>
+							<% end %>
 						</td>
 						
 					</tr>
