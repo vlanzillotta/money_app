@@ -24,7 +24,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 		<div class="panel panel-primary">
 			
 			<div class="panel-heading">
-		    	<h3 class="panel-title">Recent Transactions</h3>
+		    	<h3 class="panel-title"><%= link_to "Recent Transactions", recent_transactions_path %></h3>
 		    </div>
 		  	
 		  	<div class="panel-body">
@@ -65,7 +65,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 		<div class="panel panel-primary">
 			
 			<div class="panel-heading">
-		    	<h3 class="panel-title">Future Transactions</h3>
+		    	<h3 class="panel-title"><%= link_to "Future Transactions", future_transactions_path %></h3>
 		    </div>
 		  	
 		  	<div class="panel-body">
@@ -105,7 +105,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_b
 		<div class="panel panel-primary">
 			
 			<div class="panel-heading">
-		    	<h3 class="panel-title">Putaway Funds</h3>
+		    	<h3 class="panel-title"><%= link_to "Putaway Funds", putaway_transactions_path %></h3>
 		    </div>
 		  	
 		  	<div class="panel-body">
