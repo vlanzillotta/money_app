@@ -12,6 +12,9 @@ class UsersController < ApplicationController
 	def future_balance
 		@balance = current_user.future_balance	
 	end
+	def putaway_balance
+		@balance = current_user.putaway_balance	
+	end
 	def bank_balance
 		@balance = current_user.bank_balance	
 	end
@@ -22,6 +25,7 @@ class UsersController < ApplicationController
 		@user_balance = balance;
 		@user_future_balance = future_balance;
 		@user_bank_balance = bank_balance
+		@user_putaway_balance = putaway_balance
 
 
 

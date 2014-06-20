@@ -15,6 +15,9 @@ class User < ActiveRecord::Base
   def future_balance
   	transactions.where(:type_of => "future transaction").sum(:amount).to_i
   end
+  def putaway_balance
+    transactions.where(:type_of => "putaway transaction").sum(:amount).to_i
+  end
   def bank_balance
   	transactions.where(type_of: ["credit", "expense"]).sum(:amount).to_i
     
