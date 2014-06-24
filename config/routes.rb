@@ -16,6 +16,7 @@ Rails.application.routes.draw do
 
   #static pages routes
   get 'welcome' => 'static_pages#welcome', as: :welcome
+  get 'concept' => 'static_pages#concept', as: :concept
 
 
   #root routes (authenticated vs not)

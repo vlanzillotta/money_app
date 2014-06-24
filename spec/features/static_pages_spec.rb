@@ -11,6 +11,15 @@ describe "Static Pages" do
 
   end
 
+  describe "visit realmoney concept page" do
+
+    it "should display explaination text" do
+      visit concept_path
+      expect(page).to have_content("The RealMoney Concept")
+    end
+
+  end
+
 
   describe "visit site root" do
 
