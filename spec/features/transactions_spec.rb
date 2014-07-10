@@ -128,6 +128,11 @@ describe "Transactions - " , :type => :feature do
     it "will chnage the transaction type " do
       expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).type_of}
     end
+
+  end
+
+  describe "commiting a transaction with a repeat frequency" do
+    pending "Doing this next"
   end
 
 
