@@ -131,8 +131,25 @@ describe "Transactions - " , :type => :feature do
 
   end
 
-  describe "commiting a transaction with a repeat frequency" do
-    pending "Doing this next"
+  describe "commiting a transaction with a repeat frequency (daily)" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:original_transaction) { user.transactions.where(:repeat_frequency => "daily").first}
+    let(:original_transaction_id) { user.transactions.where(:repeat_frequency => "daily").first.id}
+
+    before {
+      sign_in user
+      populate_transactions user
+      visit dashboard_path
+      click_link "commit_#{original_transaction_id}" 
+
+    }
+
+    it " should create a new transaction that is identical but for one day later (from the original date, not today)" do
+      expect(page).to have_content("2014-12-17 repeating transaction");
+    end
+
+
+
   end
 
 

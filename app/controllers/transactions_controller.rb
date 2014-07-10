@@ -20,11 +20,24 @@ class TransactionsController < ApplicationController
 	def commit
 
 		@transaction = Transaction.find(params[:id])
+
+		if @transaction.repeat_frequency != nil
+
+			new_transaction = @transaction.dup
+
+			if @transaction.repeat_frequency == "daily"
+				new_transaction.transaction_date = (new_transaction.transaction_date+1.days).to_s
+			end
+
+			new_transaction.save
+			
+
+		end
+
 		@transaction.transaction_date = Time.now.to_s
-
 		@transaction.type_of = @transaction.amount > 0 ? "credit" : "expense"
-
 		@transaction.save
+
 		redirect_to :back
 	end
 
