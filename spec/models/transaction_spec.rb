@@ -18,11 +18,21 @@ describe Transaction do
 	it {should respond_to(:transaction_date)}
 	it {should respond_to(:type_of)}
 	it {should respond_to(:user_id)}
+	it {should respond_to(:repeat_frequency)}
 
 
 
 
 	# verifying fields exist
+	describe "assigning every week to repeat frequency" do
+		before {@trans.repeat_frequency = "weekly"}
+		its(:repeat_frequency){should eq("weekly")}
+	end
+
+	describe "assigning a value outside of the acceptable frequencies" do
+		before {@trans.repeat_frequency = "tri-yearly"}
+		it {should_not be_valid}
+	end
 
 	describe "without name value" do
 		before {@trans.name = ""}
