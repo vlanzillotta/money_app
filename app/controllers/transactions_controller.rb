@@ -28,6 +28,15 @@ class TransactionsController < ApplicationController
 			if @transaction.repeat_frequency == "daily"
 				new_transaction.transaction_date = (new_transaction.transaction_date+1.days).to_s
 			end
+			if @transaction.repeat_frequency == "weekly"
+				new_transaction.transaction_date = (new_transaction.transaction_date+1.weeks).to_s
+			end
+			if @transaction.repeat_frequency == "bi-weekly"
+				new_transaction.transaction_date = (new_transaction.transaction_date+2.weeks).to_s
+			end
+			if @transaction.repeat_frequency == "monthly"
+				new_transaction.transaction_date = (new_transaction.transaction_date+1.months).to_s
+			end
 
 			new_transaction.save
 			
