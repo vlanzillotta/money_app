@@ -96,9 +96,7 @@ class TransactionsController < ApplicationController
 
 					(1..6).each do |i|
 
-						puts "==================="
-						puts current_user.transactions.where(amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.weeks).count
-						puts "==================="
+						
 						 
 						 unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.weeks).count > 0
 
