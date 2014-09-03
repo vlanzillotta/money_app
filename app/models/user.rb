@@ -22,4 +22,7 @@ class User < ActiveRecord::Base
   	transactions.where(type_of: ["credit", "expense"]).sum(:amount).to_i
     
   end
+  def next_paydate
+    transactions.where(:name => "Payroll").first.transaction_date
+  end
 end
