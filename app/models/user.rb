@@ -23,6 +23,6 @@ class User < ActiveRecord::Base
     
   end
   def next_paydate
-    transactions.where(:name => "Payroll").first.transaction_date
+    transactions.where(:name => "Payroll").where("transaction_date > ?", DateTime.now).order("transaction_date" => :asc).first.transaction_date
   end
 end
