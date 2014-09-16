@@ -1,21 +1,34 @@
-Main features
-==============================
-
- ✔ Main page with app description @done (14-06-06 23:19)
-
-Transactions
+Hotplate
 ------------------------------
 
- ☐ viewing current effective balance
- ☐ Add repeating future expenses
- ☐ Limit future transactions to only 2 weeks after current date
- ☐ Change future transactions to past transactions after the date has passed
- ☐ a button to mark a future transaction as happened
+  Payroll information
+
+    ☐ Add logic to user class for payroll information
+
+      ☐ User.NextPaydate
+      ✔ user.next_paydate should return the date of the first Payroll transaction AFTER today. @done (14-09-16 16:03)
+      ☐ If there are no paydates after today return NULL
 
 
-User
+    ☐ Repeating transactions
+
+      ☐ Only display transactions up to the day before the next paydate
+      ☐ ability to adjust the frequency
+      ☐ ability to change the initial transaction date
+      ☐ delete all future repetitions when deleting a transaction
+
+
+Bugs
 ------------------------------
 
- ✔ English readable names @done (14-06-06 23:19)
+  ☐ User can add frequency to transactions with no initial date
 
 
+Future Features
+------------------------------
+
+  ☐ Better layout for transaction form
+
+    ☐ Knowledge of when the user gets paid next
+    ☐ Title values need to reflect where you are in the app
+    ☐ Updates page for patch notes
