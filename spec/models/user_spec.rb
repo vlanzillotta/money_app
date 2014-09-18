@@ -44,5 +44,9 @@ describe User do
 		its(:next_paydate) { should eq Date.parse "2014-12-25"  }
 	end
 
+	describe "if there is no payment date" do
+		its(:next_paydate) { should eq  nil  }
+	end
+
 
 end
