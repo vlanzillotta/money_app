@@ -11,7 +11,7 @@ Hotplate
 
     ☐ Repeating transactions
 
-      ☐ Only display transactions up to the day before the next paydate
+      ✔ Only display transactions up to the day before the next paydate @done (14-09-19 16:00)
       ☐ ability to adjust the frequency
       ☐ ability to change the initial transaction date
       ☐ delete all future repetitions when deleting a transaction
