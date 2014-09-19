@@ -12,14 +12,15 @@ describe User do
   	end
   	subject { @user }
 
-
+  	it {should respond_to(:balance)}
+	it {should respond_to(:name)}
+  	
   	describe "without a name" do
   		before {@user.name = ""}
   		it {should_not be_valid}
   	end
 
-	it {should respond_to(:balance)}
-	it {should respond_to(:name)}
+	
 	
 
 	describe "balance results" do
@@ -37,16 +38,16 @@ describe User do
 
 	describe "if there is a paydate before today" do
 
-
 		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date: "2014-12-25") }
 		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date:  (Time.now-5.days).to_s )}
-		
 		its(:next_paydate) { should eq Date.parse "2014-12-25"  }
 	end
 
 	describe "if there is no payment date" do
 		its(:next_paydate) { should eq  nil  }
 	end
+
+
 
 
 end
