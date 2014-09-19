@@ -8,7 +8,7 @@ class Transaction < ActiveRecord::Base
 		"daily", 
 		"weekly", 
 		"bi-weekly", 
-		"monthly"], 
+		"monthly", ""], 
 		:allow_nil => true
 
 	def amount=(value)
