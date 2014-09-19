@@ -7,14 +7,15 @@ describe User do
 	    		password: "password", 
 	    		password_confirmation: "password")
 
-    		populate_transactions @user
+    		# populate_transactions @user
 
   	end
   	subject { @user }
 
   	it {should respond_to(:balance)}
 	it {should respond_to(:name)}
-  	
+	it {should respond_to(:next_transactions)}
+
   	describe "without a name" do
   		before {@user.name = ""}
   		it {should_not be_valid}
@@ -24,6 +25,7 @@ describe User do
 	
 
 	describe "balance results" do
+		before {populate_transactions @user}
 		its(:balance) { should eq 2300.00 } 
 	end
 
@@ -45,6 +47,42 @@ describe User do
 
 	describe "if there is no payment date" do
 		its(:next_paydate) { should eq  nil  }
+	end
+
+	describe "next_transactions should only display up to the next paydate" do
+
+		before { 
+			@user.transactions.create(name: "Payroll", amount: 1000 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+2.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+3.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+4.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+6.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+7.days).to_s )
+
+		}
+		it "Next transactions should only include transactions up to the day before the next paydate" do
+			@user.next_transactions.last.transaction_date.should eq Date.today+4.days
+		end
+	end
+
+
+	describe "next_transactions display all future transactions if there is no next paydate" do
+
+		before { 
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+2.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+3.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+4.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+6.days).to_s )
+			@user.transactions.create(name: "expense", amount: 25 , transaction_date:  (Time.now+7.days).to_s )
+
+		}
+		it "should display all future transactions" do
+			@user.next_transactions.last.transaction_date.should eq Date.today+7.days
+		end
 	end
 
 

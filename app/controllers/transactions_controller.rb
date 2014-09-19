@@ -54,6 +54,11 @@ class TransactionsController < ApplicationController
 		@transaction  = @current_user.transactions.where type_of: "future transaction" 
 
 	end
+	def next_transactions
+		@current_user = current_user
+		@transaction  = @current_user.next_transactions
+
+	end
 	def putaway_transactions
 		@current_user = current_user
 		@transaction  = @current_user.transactions.where type_of: "putaway transaction" 

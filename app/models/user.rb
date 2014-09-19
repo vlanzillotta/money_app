@@ -28,4 +28,14 @@ class User < ActiveRecord::Base
     return first_transaction ? first_transaction.transaction_date : nil
 
   end
+  def next_transactions
+  
+    if next_paydate
+      transactions.where(:type_of => "future transaction").where("transaction_date < ?", next_paydate)
+    else
+      transactions.where(:type_of => "future transaction")
+    end
+    
+  
+  end
 end

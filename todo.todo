@@ -3,11 +3,10 @@ Hotplate
 
   Payroll information
 
-    ☐ Add logic to user class for payroll information
+    ✔ Add logic to user class for payroll information @done (14-09-19 10:34)
 
-      ☐ User.NextPaydate
       ✔ user.next_paydate should return the date of the first Payroll transaction AFTER today. @done (14-09-16 16:03)
-      ☐ If there are no paydates after today return NULL
+      ✔ If there are no paydates after today return NULL @done (14-09-19 08:49)
 
 
     ☐ Repeating transactions
