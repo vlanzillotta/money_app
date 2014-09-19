@@ -83,7 +83,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 						<th>Amount</th>
 						
 					</tr>
-				<% @future_transactions.each do |transaction| %>
+				<% @next_transactions.each do |transaction| %>
 					<tr class="<%=transaction.type_of%>">
 						<td>
 							<%= transaction.transaction_date %>

@@ -21,6 +21,7 @@ class UsersController < ApplicationController
 	def dashboard
 		@recent_transactions  = current_user.transactions.where(type_of: ["credit", "expense"])
 		@future_transactions  = current_user.transactions.where type_of: "future transaction" 
+		@next_transactions  = current_user.next_transactions
 		@putaway_transactions  = current_user.transactions.where type_of: "putaway transaction"
 		@user_balance = balance;
 		@user_future_balance = future_balance;
