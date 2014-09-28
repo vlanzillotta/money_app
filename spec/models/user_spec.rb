@@ -15,6 +15,7 @@ describe User do
   	it {should respond_to(:balance)}
 	it {should respond_to(:name)}
 	it {should respond_to(:next_transactions)}
+	it {should respond_to(:payperiod_balance)}
 
   	describe "without a name" do
   		before {@user.name = ""}
@@ -83,6 +84,43 @@ describe User do
 		it "should display all future transactions" do
 			@user.next_transactions.last.transaction_date.should eq Date.today+7.days
 		end
+	end
+
+	describe "balance for the current pay period when there is an upcomming paydate" do
+
+		before { 
+			@user.transactions.create(name: "Initial balance", amount: 1000 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+2.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+3.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+4.days).to_s )
+			@user.transactions.create(name: "Payroll", amount: 1000 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+6.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+7.days).to_s )
+
+		}
+		its(:payperiod_balance) { should eq  900}
+			
+		
+	end
+
+	describe "balance for the current pay period when there is no upcomming paydate" do
+
+		before { 
+			@user.transactions.create(name: "Initial balance", amount: 1000 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+2.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+3.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+4.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+6.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+7.days).to_s )
+
+		}
+		its(:payperiod_balance) { should eq  825}
+			
+		
 	end
 
 

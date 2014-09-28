@@ -12,6 +12,21 @@ class User < ActiveRecord::Base
   	transactions.sum("amount").to_i
   end
 
+
+  def payperiod_balance
+  
+     
+     current_next_paydate = next_paydate;
+     
+     if current_next_paydate
+        transactions.where("transaction_date < ?", current_next_paydate).sum(:amount).to_i
+     else
+       balance
+     end
+  
+
+  end
+
   def future_balance
   	transactions.where(:type_of => "future transaction").sum(:amount).to_i
   end
