@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
      current_next_paydate = next_paydate;
      
      if current_next_paydate
-        transactions.where("transaction_date < ?", current_next_paydate).sum(:amount).to_i
+        transactions.where("transaction_date < ?", current_next_paydate).sum(:amount).to_i + putaway_balance
      else
        balance
      end

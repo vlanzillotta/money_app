@@ -105,6 +105,8 @@ describe User do
 		
 	end
 
+
+
 	describe "balance for the current pay period when there is no upcomming paydate" do
 
 		before { 
@@ -123,7 +125,25 @@ describe User do
 		
 	end
 
+	describe "balance for the current pay period when there is an upcomming paydate AND putaway funds" do
 
+		before { 
+			@user.transactions.create(name: "putaway transaction", amount: -100,  transaction_date:  "" )
+			@user.transactions.create(name: "Initial balance", amount: 1000 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+1.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+2.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+3.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+4.days).to_s )
+			@user.transactions.create(name: "Payroll", amount: 1000 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+5.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+6.days).to_s )
+			@user.transactions.create(name: "expense", amount: -25 , transaction_date:  (Time.now+7.days).to_s )
+
+		}
+		its(:payperiod_balance) { should eq  800}
+			
+		
+	end
 
 
 end
