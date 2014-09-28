@@ -27,6 +27,7 @@ class UsersController < ApplicationController
 		@user_future_balance = future_balance;
 		@user_bank_balance = bank_balance
 		@user_putaway_balance = putaway_balance
+		@user_ppb = current_user.payperiod_balance
 
 
 
