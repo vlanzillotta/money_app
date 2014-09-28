@@ -4,6 +4,12 @@ class Transaction < ActiveRecord::Base
 
 	validates_presence_of :name, :type_of, :amount, :user_id
 	validates :amount, :numericality => {:other_than => 0.00}
+	validates_inclusion_of :repeat_frequency, :in => [
+		"daily", 
+		"weekly", 
+		"bi-weekly", 
+		"monthly", ""], 
+		:allow_nil => true
 
 	def amount=(value)
 			
@@ -20,28 +26,21 @@ class Transaction < ActiveRecord::Base
 
 
 	def transaction_date=(value)
-
-		# if value == ""
-		# 	write_attribute(:transaction_date, value);
-		# 	write_attribute(:type_of, "putaway transaction") 
-		# else
-			
-			begin
-			   Date.parse(value)
-			rescue ArgumentError
-			  value = ""
-			  write_attribute(:transaction_date, value);
-			  write_attribute(:type_of, "putaway transaction") 
+	
+		begin
+		   Date.parse(value)
+		rescue ArgumentError
+		  value = ""
+		  write_attribute(:transaction_date, value);
+		  write_attribute(:type_of, "putaway transaction") 
+		end
+		
+		if value != ""
+			write_attribute(:transaction_date, value);
+			value = Date.parse value
+			if value > Date.today
+				write_attribute(:type_of, "future transaction") 
 			end
-			
-			if value != ""
-				write_attribute(:transaction_date, value);
-				value = Date.parse value
-				if value > Date.today
-					write_attribute(:type_of, "future transaction") 
-				end
-			end
-			
-		# end	
+		end	
 	end
 end

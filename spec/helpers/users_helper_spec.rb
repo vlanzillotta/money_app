@@ -25,7 +25,7 @@ end
 
 def populate_transactions (user)
 
-	user.transactions.create(name: "first", amount: 100 , transaction_date: "2014-05-16")
+	user.transactions.create(name: "repeating transaction", amount: 100 , transaction_date: "2014-12-16")
 	user.transactions.create(name: "second", amount: 100 , transaction_date: "2014-05-16")
 	user.transactions.create(name: "third", amount: 400 , transaction_date: "2016-05-16")
 	user.transactions.create(name: "fourth", amount: 100 , transaction_date: "2015-05-16")
