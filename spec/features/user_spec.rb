@@ -33,7 +33,7 @@ describe "User "  do
 		it "displays recent transaction table" do
 
 			expect(page).to have_content('Recent Transactions')
-			expect(page).to have_content('Future Transactions')
+			expect(page).to have_content('Next Transactions')
 			expect(page).to have_content('Putaway Funds')
 		end
 

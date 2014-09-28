@@ -11,5 +11,15 @@ New Transaction
 	<%= transaction.label :transaction_date %>
 	<%= transaction.text_field :transaction_date %>
 
+	<%= transaction.label :repeat_frequency %>
+	<%= select(:transaction, :repeat_frequency, [
+							["never", ""],
+							["daily", "daily"],  
+							["weekly", "weekly"],
+							["bi-weekly", "bi-weekly"],  
+							["monthly", "monthly"],
+
+							]) %>
+
 	 <%= transaction.submit "submit", class: "btn btn-large btn-primary" %>
 <% end %>

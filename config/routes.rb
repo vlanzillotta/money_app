@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get 'transactions/putaway' => 'transactions#putaway_transactions', as: :putaway_transactions
   get 'transactions/recent' => 'transactions#recent_transactions', as: :recent_transactions
 
-  get 'transactions/:id/commit' => 'transactions#commit', as: :transaction_commit
+  post 'transactions/:id/commit' => 'transactions#commit', as: :transaction_commit
   resources :transactions
 
   #static pages routes

@@ -32,7 +32,7 @@ describe "Static Pages" do
   	it "when logged in" do
   		sign_in user
   		visit root_path
-  		expect(page).to have_content("Your current balance is")
+  		expect(page).to have_content("Your current pay period balance is")
   	end
 
   end

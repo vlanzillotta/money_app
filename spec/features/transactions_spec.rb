@@ -34,6 +34,7 @@ describe "Transactions - " , :type => :feature do
       fill_in  "transaction_name",  with: "initial transaction"
       fill_in  "transaction_amount",  with: 100
       fill_in  "transaction_transaction_date",  with: "2014-05-20"
+      select "weekly", :from => "transaction_repeat_frequency"
     }
 
     it "should add a transaction" do
@@ -127,6 +128,40 @@ describe "Transactions - " , :type => :feature do
     it "will chnage the transaction type " do
       expect { click_link "commit_#{transaction_id}" }.to change {Transaction.find(transaction_id).type_of}
     end
+
+  end
+
+
+
+  describe "creating a transaction with a repeat frequency (daily)" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:original_transaction) { user.transactions.where(:repeat_frequency => "daily").first}
+    let(:original_transaction_id) { user.transactions.where(:repeat_frequency => "daily").first.id}
+
+    before {
+      sign_in user
+
+      visit new_transaction_path
+      fill_in  "transaction_name",  with: "repeating transaction"
+      fill_in  "transaction_amount",  with: 100
+      fill_in  "transaction_transaction_date",  with: "2094-12-16"
+      select "daily", :from => "transaction_repeat_frequency"
+      click_button "submit" 
+
+      
+      
+
+
+      visit dashboard_path
+
+    }
+
+    it " should create 31 duplicate transactions with all the same information except for the date)" do
+      expect(page).to have_content("2095-01-16 repeating transaction");
+    end
+
+
+
   end
 
 
