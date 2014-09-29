@@ -2,15 +2,21 @@
 New Transaction
 
 <%= form_for @transaction, url: {action: "create"}, html: {} do |transaction| %>
+
+	<div class="row">
 	<%= transaction.label :name %>
 	<%= transaction.text_field :name %>
+	</div>
 
+	<div class="row">
 	<%= transaction.label :amount %>
 	<%= transaction.text_field :amount %>
-
+	</div>
+	<div class="row">
 	<%= transaction.label :transaction_date %>
 	<%= transaction.text_field :transaction_date %>
-
+	</div>
+	<div class="row">
 	<%= transaction.label :repeat_frequency %>
 	<%= select(:transaction, :repeat_frequency, [
 							["never", ""],
@@ -20,6 +26,9 @@ New Transaction
 							["monthly", "monthly"],
 
 							]) %>
+	</div>
 
+	<div class="row">
 	 <%= transaction.submit "submit", class: "btn btn-large btn-primary" %>
+	</div>
 <% end %>
