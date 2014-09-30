@@ -40,6 +40,18 @@ describe "Transactions - " , :type => :feature do
     end  
   end
 
+  describe "creating new putaway transaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      visit new_putaway_transaction_path
+    }
+
+    it "should now display repeat frequencies" do
+      expect(page).to_not have_content("Repeat frequency")   
+    end
+  end
+
   describe "deleting a trsnaction" do
     let(:user) { FactoryGirl.create(:user) }
     
