@@ -12,10 +12,13 @@ New Transaction
 	<%= transaction.label :amount %>
 	<%= transaction.text_field :amount %>
 	</div>
-	<div class="row">
-	<%= transaction.label :transaction_date %>
-	<%= transaction.text_field :transaction_date %>
-	</div>
+	
+		<div class="row">	
+		<%= transaction.label :transaction_date %>
+		<%= transaction.text_field :transaction_date %>
+		</div>
+	
+	<% if @transaction.type_of != "putaway"%>
 	<div class="row">
 	<%= transaction.label :repeat_frequency %>
 	<%= select(:transaction, :repeat_frequency, [
@@ -27,7 +30,8 @@ New Transaction
 
 							]) %>
 	</div>
-
+	
+	<% end %>
 	<div class="row">
 	 <%= transaction.submit "submit", class: "btn btn-large btn-primary" %>
 	</div>

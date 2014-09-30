@@ -44,10 +44,10 @@ describe "Transactions - " , :type => :feature do
     let(:user) { FactoryGirl.create(:user) }
     before {
       sign_in user
-      visit new_putaway_transaction_path
+      visit "/transactions/new/putaway"
     }
 
-    it "should now display repeat frequencies" do
+    it "should not display repeat frequencies" do
       expect(page).to_not have_content("Repeat frequency")   
     end
   end

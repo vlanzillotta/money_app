@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   post 'transactions/:id/commit' => 'transactions#commit', as: :transaction_commit
   resources :transactions
 
+  get 'transactions/new/:type_of' => 'transactions#new', as: :new_transaction_with_type
+
   #static pages routes
   get 'welcome' => 'static_pages#welcome', as: :welcome
   get 'concept' => 'static_pages#concept', as: :concept
