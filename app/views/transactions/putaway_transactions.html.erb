@@ -17,7 +17,7 @@ Here are your Putaway transactions!
 		</td>
 		<td>
 
-			<%= link_to("[COMMIT]", {controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") %>
+			<%= link_to("[COMMIT]", {controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}", :method => "post") %>
 			<%= link_to("[DELETE]", transaction , :method => :delete, :id => "delete_#{transaction.id}") %>
 			<%= link_to("[EDIT]", edit_transaction_path(transaction) , :method => :get, :id => "edit_#{transaction.id}") %>
 		</td>

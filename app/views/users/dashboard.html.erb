@@ -1,7 +1,6 @@
 
-<p>Your current balance is <b>$<%=@user_balance%> </b>.
-Your bank balance is <b>$<%=@user_bank_balance%></b> 
-with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_putaway_balance%></b> put away</p>
+<p>Your current pay period balance is <b>$<%=@user_ppb%> </b>.
+
 
 
   <div class="progress">
@@ -64,7 +63,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 					</tr>
 				<% end %>
 				</table>
-				<%= link_to 'Create New Transaction', new_transaction_path , :method => :get %>
+				<%= link_to 'Create New Recent Transaction', new_transaction_path , :method => :get %>
 			</div>
 		</div>
 	</div>
@@ -72,7 +71,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 		<div class="panel panel-primary">
 			
 			<div class="panel-heading">
-		    	<h3 class="panel-title"><%= link_to "Future Transactions", future_transactions_path %></h3>
+		    	<h3 class="panel-title"><%= link_to "Next Transactions", future_transactions_path %></h3>
 		    </div>
 		  	
 		  	<div class="panel-body">
@@ -83,7 +82,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 						<th>Amount</th>
 						
 					</tr>
-				<% @future_transactions.each do |transaction| %>
+				<% @next_transactions.each do |transaction| %>
 					<tr class="<%=transaction.type_of%>">
 						<td>
 							<%= transaction.transaction_date %>
@@ -102,7 +101,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 							<%= link_to(edit_transaction_path(transaction) , :id => "edit_#{transaction.id}") do %>
 							 <span class="glyphicon glyphicon-edit"></span>
 							<% end %>
-							<%= link_to({controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") do %>
+							<%= link_to({controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}", :method => "post") do %>
 							 <span class="glyphicon glyphicon-record"></span>
 							<% end %>
 						</td>
@@ -110,7 +109,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 					</tr>
 				<% end %>
 				</table>
-				<%= link_to 'Create New Transaction', new_transaction_path , :method => :get %>
+				<%= link_to 'Create New Next Transaction', new_transaction_path , :method => :get %>
 			</div>
 		</div>
 	</div>
@@ -146,7 +145,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 							<%= link_to(edit_transaction_path(transaction) , :id => "edit_#{transaction.id}") do %>
 							 <span class="glyphicon glyphicon-edit"></span>
 							<% end %>
-							<%= link_to({controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}") do %>
+							<%= link_to({controller: "transactions", action: "commit", :id => transaction.id}, :id => "commit_#{transaction.id}" , :method => "post") do %>
 							 <span class="glyphicon glyphicon-record"></span>
 							<% end %>
 						</td>
@@ -154,7 +153,7 @@ with <b>$<%=@user_future_balance%></b> in future transactions and <b>$<%=@user_p
 					</tr>
 				<% end %>
 				</table>
-				<%= link_to 'Create New Transaction', new_transaction_path , :method => :get %>
+				<%= link_to 'Create New Putaway Transaction', new_transaction_with_type_path(:type_of => "putaway"),:method => :get  %>
 			</div>
 		</div>
 	</div>
