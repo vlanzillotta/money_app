@@ -1,12 +1,10 @@
 Hotplate
 ------------------------------
 
-* Better layout for transaction form 
-    * Add logic for what controls to display for different transaction types
-
 Bugs
 ------------------------------
 * User can add frequency to transactions with no initial date
+* You can commit actions to other users transactions by changing link IDs to that of their transactions
 
 Future Features
 ------------------------------

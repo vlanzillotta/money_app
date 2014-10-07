@@ -36,7 +36,11 @@ class TransactionsController < ApplicationController
 	end
 
 	def new
+
+		
 		@transaction = Transaction.new
+		@transaction.type_of = params[:type_of]
+		
 	end
 
 	def create
@@ -80,7 +84,7 @@ class TransactionsController < ApplicationController
 	private
 
 		def transaction_params
-			params.require(:transaction).permit(:name, :amount, :transaction_date, :repeat_frequency)
+			params.require(:transaction).permit(:name, :amount, :transaction_date, :repeat_frequency, :transaction_type)
 		end
 
 		def create_repeating_transaction_instances(transaction)
