@@ -1,6 +1,5 @@
 Hotplate
 ------------------------------
-* update dashboard links to use new #new paths    
 
 Bugs
 ------------------------------
