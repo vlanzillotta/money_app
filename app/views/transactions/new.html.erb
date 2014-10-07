@@ -6,7 +6,7 @@
 			
 
 			<div class="panel-heading">
-		    	<h3 class="panel-title">New <%= @transaction.type_of %> Transaction</h3>
+		    	<h3 class="panel-title">New <%= @transaction.type_of.capitalize %> Transaction</h3>
 		    </div>
 		    <div class="panel-body">
 		    <%= form_for @transaction, url: {action: "create"}, html: {} do |transaction| %>
@@ -21,12 +21,13 @@
 				<%= transaction.text_field :amount %>
 				</p>
 
-				<p>
-				<%= transaction.label :transaction_date %>:
-				<%= transaction.text_field :transaction_date %>
-				</p>
-
 				<% if @transaction.type_of != "putaway"%>
+					<p>
+					<%= transaction.label :transaction_date %>:
+					<%= transaction.text_field :transaction_date %>
+					</p>
+
+				
 					<p>
 					<%= transaction.label :repeat_frequency %>:
 					<%= select(:transaction, :repeat_frequency, [

@@ -1,8 +1,6 @@
 Hotplate
 ------------------------------
-
-* Better layout for transaction form 
-    * Add logic for what controls to display for different transaction types
+* update dashboard links to use new #new paths    
 
 Bugs
 ------------------------------
