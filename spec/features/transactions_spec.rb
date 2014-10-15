@@ -205,5 +205,17 @@ describe "Transactions - " , :type => :feature do
     end
   end
 
+  describe "User cant delete another users transaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:another_user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+      visit new_transaction_path
+      fill_in  "transaction_name",  with: "initial transaction"
+      fill_in  "transaction_amount",  with: 100
+      fill_in  "transaction_transaction_date",  with: "2014-05-20"
+      select "weekly", :from => "transaction_repeat_frequency"
+    }
+  end
 
 end
