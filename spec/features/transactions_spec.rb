@@ -207,15 +207,21 @@ describe "Transactions - " , :type => :feature do
 
   describe "User cant delete another users transaction" do
     let(:user) { FactoryGirl.create(:user) }
-    let(:another_user) { FactoryGirl.create(:user) }
+    let(:user2) { FactoryGirl.create(:user2) }
     before {
       sign_in user
-      visit new_transaction_path
-      fill_in  "transaction_name",  with: "initial transaction"
-      fill_in  "transaction_amount",  with: 100
-      fill_in  "transaction_transaction_date",  with: "2014-05-20"
-      select "weekly", :from => "transaction_repeat_frequency"
+      populate_transactions user
+      populate_transactions user2
+      
+      puts "hello #{user2.transactions.last.id}"
+
+      # Now as user (1) hit the destroy action for user2's transaction 40
+      
     }
+    it "should display an error" do
+      expect(page).to have_content("An error occured")
+
+    end
   end
 
 end
