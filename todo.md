@@ -1,6 +1,6 @@
 Hotplate
 ------------------------------
-* BUG: User can add frequency to transactions with no initial date
+* Title values need to reflect where you are in the app
 
 Bugs
 ------------------------------
@@ -9,7 +9,6 @@ Bugs
 Future Features
 ------------------------------
 
-* Title values need to reflect where you are in the app
 * Updates page for patch notes
 * Repeating transactions
     * ability to adjust the frequency
