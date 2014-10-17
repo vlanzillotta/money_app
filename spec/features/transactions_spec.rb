@@ -205,5 +205,38 @@ describe "Transactions - " , :type => :feature do
     end
   end
 
+  # describe "User cant commit another users transaction" do
+  #   let(:user) { FactoryGirl.create(:user) }
+  #   let(:user2) { FactoryGirl.create(:user2) }
+  #   before {
+  #     populate_transactions user
+  #     populate_transactions user2
+  #     sign_in user2
+      
+  #     # Now as user2 fake a hit to the commit first user's transaction 1
+  #     visit transaction_commit_path(:id =>1, :method => "post")
+  #   }
+  #   it "should display an error" do
+  #     expect(page).to have_content("An error occured")
 
+  #   end
+  # end
+
+  describe "User should not be able to add repeat frequency to dateless transaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+
+      visit new_transaction_path
+      fill_in  "transaction_name",  with: "repeating transaction"
+      fill_in  "transaction_amount",  with: 100
+      fill_in  "transaction_transaction_date",  with: ""
+      select "daily", :from => "transaction_repeat_frequency"
+      click_button "submit" 
+      
+    }
+    it "should display an error" do
+      expect(page).to have_content("You cannot have a repeat frequency without a starting date")
+    end
+  end
 end

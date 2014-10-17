@@ -1,6 +1,6 @@
 class TransactionsController < ApplicationController
 	before_action :authenticate_user!
-
+	before_action :verify_user_to_transaction
 	def index
 		@current_user = current_user
 		@current_user_id = @current_user.id
@@ -18,7 +18,7 @@ class TransactionsController < ApplicationController
 	end
 
 	def commit
-
+		
 		@transaction = Transaction.find(params[:id])
 
 		# if @transaction.repeat_frequency != nil
@@ -47,6 +47,8 @@ class TransactionsController < ApplicationController
 		@current_user = current_user
 		saved_transaction = @current_user.transactions.create(transaction_params)
 
+
+		
 		create_repeating_transaction_instances saved_transaction
 
 		redirect_to transactions_path
@@ -88,6 +90,13 @@ class TransactionsController < ApplicationController
 		end
 
 		def create_repeating_transaction_instances(transaction)
+
+			if(transaction.repeat_frequency && !transaction.transaction_date )	
+				transaction.repeat_frequency = ""
+				transaction.save
+				flash[:notice] = "You cannot have a repeat frequency without a starting date"
+			end
+
 			case transaction.repeat_frequency
 				when "daily"
 					(1..32).each do |i|
@@ -141,6 +150,14 @@ class TransactionsController < ApplicationController
 				
 
 			end			
+		end
+		def verify_user_to_transaction
+			if params[:id]
+				this_transaction = Transaction.find(params[:id]);
+				if this_transaction.user_id != current_user.id
+					redirect_to dashboard_path
+				end
+			end
 		end
 
 
