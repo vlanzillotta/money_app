@@ -205,23 +205,21 @@ describe "Transactions - " , :type => :feature do
     end
   end
 
-  describe "User cant delete another users transaction" do
-    let(:user) { FactoryGirl.create(:user) }
-    let(:user2) { FactoryGirl.create(:user2) }
-    before {
-      sign_in user
-      populate_transactions user
-      populate_transactions user2
+  # describe "User cant commit another users transaction" do
+  #   let(:user) { FactoryGirl.create(:user) }
+  #   let(:user2) { FactoryGirl.create(:user2) }
+  #   before {
+  #     populate_transactions user
+  #     populate_transactions user2
+  #     sign_in user2
       
-      puts "hello #{user2.transactions.last.id}"
+  #     # Now as user2 fake a hit to the commit first user's transaction 1
+  #     visit transaction_commit_path(:id =>1, :method => "post")
+  #   }
+  #   it "should display an error" do
+  #     expect(page).to have_content("An error occured")
 
-      # Now as user (1) hit the destroy action for user2's transaction 40
-      
-    }
-    it "should display an error" do
-      expect(page).to have_content("An error occured")
-
-    end
-  end
+  #   end
+  # end
 
 end
