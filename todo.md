@@ -14,3 +14,4 @@ Future Features
     * ability to adjust the frequency
     * ability to change the initial transaction date
     * delete all future repetitions when deleting a transaction
+* Need better design for alert messaging
