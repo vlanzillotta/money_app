@@ -222,4 +222,21 @@ describe "Transactions - " , :type => :feature do
   #   end
   # end
 
+  describe "User should not be able to add repeat frequency to dateless transaction" do
+    let(:user) { FactoryGirl.create(:user) }
+    before {
+      sign_in user
+
+      visit new_transaction_path
+      fill_in  "transaction_name",  with: "repeating transaction"
+      fill_in  "transaction_amount",  with: 100
+      fill_in  "transaction_transaction_date",  with: ""
+      select "daily", :from => "transaction_repeat_frequency"
+      click_button "submit" 
+      
+    }
+    it "should display an error" do
+      expect(page).to have_content("You cannot have a repeat frequency without a starting date")
+    end
+  end
 end
