@@ -149,6 +149,29 @@ describe "Transactions - " , :type => :feature do
     end
   end
 
+  describe "deleting a repeating transaction (daily)" do
+      # lets make the same repeating transaction as the above test
+      let(:user) { FactoryGirl.create(:user) }
+
+      before {
+        sign_in user
+
+        visit new_transaction_path
+        fill_in  "transaction_name",  with: "repeating transaction"
+        fill_in  "transaction_amount",  with: 100
+        fill_in  "transaction_transaction_date",  with: "2094-12-16"
+        select "daily", :from => "transaction_repeat_frequency"
+        click_button "submit" 
+        visit dashboard_path
+        
+        click_link "delete_#{user.transactions.first.id}"
+      }
+      it " should not show the 30th repeat of this transaction)" do
+        expect(page).not_to have_content("2095-01-16 repeating transaction");
+      end
+
+  end
+
 
   describe "creating a new transaction from the transaction index page" do
 
