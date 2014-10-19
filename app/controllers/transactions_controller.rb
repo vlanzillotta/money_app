@@ -79,6 +79,8 @@ class TransactionsController < ApplicationController
 	end
 
 	def destroy
+		
+		delete_repeating_transactions(Transaction.find(params[:id]))
 		Transaction.find(params[:id]).destroy
 		redirect_to :back
 		
@@ -145,6 +147,66 @@ class TransactionsController < ApplicationController
 					   new_transaction = transaction.dup
 					   new_transaction.transaction_date = (new_transaction.transaction_date+i.months).to_s
 					   new_transaction.save
+					    end
+					 end
+				
+
+			end			
+		end
+		def delete_repeating_transactions(transaction)
+
+			
+
+			case transaction.repeat_frequency
+				when "daily"
+					(1..32).each do |i|
+
+					   unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.days).count == 0
+
+					   	transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.days)
+
+					   	
+					   	Transaction.find(transaction_to_destroy).destroy
+					   
+					   end
+					   
+					 end
+				when "weekly"
+					
+					
+
+					(1..6).each do |i|
+
+						
+						 
+						 unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.weeks).count == 0
+
+							 
+					 		transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.weeks)
+					   		Transaction.find(transaction_to_destroy).destroy
+
+
+					 	 end
+					end
+
+
+
+
+				when "bi-weekly"
+					(1..3).each do |i|
+						unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+(i * 2).weeks).count > 0
+
+						   transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+(i * 2).weeks)
+						   Transaction.find(transaction_to_destroy).destroy
+					   	end
+					 end
+
+				when "monthly"
+					(1..3).each do |i|
+					    unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months).count > 0
+					   	
+					   	transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months)
+						   Transaction.find(transaction_to_destroy).destroy
 					    end
 					 end
 				
