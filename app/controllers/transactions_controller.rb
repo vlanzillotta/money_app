@@ -46,9 +46,13 @@ class TransactionsController < ApplicationController
 	def create
 		@current_user = current_user
 		saved_transaction = @current_user.transactions.create(transaction_params)
-
-
 		
+		#This has to be done to make sure Type_of conditions get checked
+		saved_transaction.transaction_date =  transaction_params["transaction_date"] ? transaction_params["transaction_date"] : ""
+		saved_transaction.save
+		#end of type_of forced checking
+
+
 		create_repeating_transaction_instances saved_transaction
 
 		redirect_to transactions_path
