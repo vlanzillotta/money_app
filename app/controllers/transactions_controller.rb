@@ -145,6 +145,8 @@ class TransactionsController < ApplicationController
 					   	end
 					 end
 
+				
+
 				when "monthly"
 					(1..3).each do |i|
 					    unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months).count > 0
@@ -198,7 +200,7 @@ class TransactionsController < ApplicationController
 
 				when "bi-weekly"
 					(1..3).each do |i|
-						unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+(i * 2).weeks).count > 0
+						unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+(i * 2).weeks).count == 0
 
 						   transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+(i * 2).weeks)
 						   Transaction.find(transaction_to_destroy).destroy
@@ -207,10 +209,10 @@ class TransactionsController < ApplicationController
 
 				when "monthly"
 					(1..3).each do |i|
-					    unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months).count > 0
+					    unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months).count == 0
 					   	
-					   	transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months)
-						   Transaction.find(transaction_to_destroy).destroy
+					   		transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: transaction.transaction_date+i.months)
+						   	Transaction.find(transaction_to_destroy).destroy
 					    end
 					 end
 				
