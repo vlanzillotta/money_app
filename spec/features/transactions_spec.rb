@@ -194,7 +194,7 @@ describe "Transactions - " , :type => :feature do
       expect(page).to have_content("2020-05-15 repeating transaction");
       expect(page).to have_content("2020-05-29 repeating transaction"); #nearest business day
       expect(page).to have_content("2020-06-15 repeating transaction");
-      expect(page).to have_content("2020-06-31 repeating transaction");
+      expect(page).to have_content("2020-06-30 repeating transaction");
     end
   end
 
@@ -218,7 +218,7 @@ describe "Transactions - " , :type => :feature do
       it " should not show the 30th repeat of this transaction)" do
         expect(page).not_to have_content("2020-05-29 repeating transaction"); #nearest business day
         expect(page).not_to have_content("2020-06-15 repeating transaction");
-        expect(page).not_to have_content("2020-06-31 repeating transaction");
+        expect(page).not_to have_content("2020-06-30 repeating transaction");
       end
 
   end
