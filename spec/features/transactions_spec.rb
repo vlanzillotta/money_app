@@ -125,7 +125,7 @@ describe "Transactions - " , :type => :feature do
   end
 
 
-
+  #Daily transactions (standard repeating rules)
   describe "creating a transaction with a repeat frequency (daily)" do
     let(:user) { FactoryGirl.create(:user) }
     let(:original_transaction) { user.transactions.where(:repeat_frequency => "daily").first}
@@ -168,6 +168,57 @@ describe "Transactions - " , :type => :feature do
       }
       it " should not show the 30th repeat of this transaction)" do
         expect(page).not_to have_content("2095-01-16 repeating transaction");
+      end
+
+  end
+  #Semi-monthly transactions (Very strict rules for these)
+  describe "creating a transaction with a repeat frequency (semi-monthly)" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:original_transaction) { user.transactions.where(:repeat_frequency => "semi-monthly").first}
+    let(:original_transaction_id) { user.transactions.where(:repeat_frequency => "semi-monthly").first.id}
+
+    before {
+      sign_in user
+
+      visit new_transaction_path
+      fill_in  "transaction_name",  with: "repeating transaction"
+      fill_in  "transaction_amount",  with: 100
+      fill_in  "transaction_transaction_date",  with: "2020-05-15"
+      select "semi-monthly", :from => "transaction_repeat_frequency"
+      click_button "submit" 
+      visit dashboard_path
+
+    }
+
+    it " should create 4 duplicate transactions with all the same information except for the date)" do
+      expect(page).to have_content("2020-05-15 repeating transaction");
+      expect(page).to have_content("2020-05-29 repeating transaction"); #nearest business day
+      expect(page).to have_content("2020-06-15 repeating transaction");
+      expect(page).to have_content("2020-06-31 repeating transaction");
+    end
+  end
+
+  describe "deleting a repeating transaction (semi-monthly)" do
+      # lets make the same repeating transaction as the above test
+      let(:user) { FactoryGirl.create(:user) }
+
+      before {
+        sign_in user
+
+        visit new_transaction_path
+        fill_in  "transaction_name",  with: "repeating transaction"
+        fill_in  "transaction_amount",  with: 100
+        fill_in  "transaction_transaction_date",  with: "2020-05-15"
+        select "semi-monthly", :from => "transaction_repeat_frequency"
+        click_button "submit" 
+        visit dashboard_path
+        
+        click_link "delete_#{user.transactions.first.id}"
+      }
+      it " should not show the 30th repeat of this transaction)" do
+        expect(page).not_to have_content("2020-05-29 repeating transaction"); #nearest business day
+        expect(page).not_to have_content("2020-06-15 repeating transaction");
+        expect(page).not_to have_content("2020-06-31 repeating transaction");
       end
 
   end
