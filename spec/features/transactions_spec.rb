@@ -215,7 +215,7 @@ describe "Transactions - " , :type => :feature do
         
         click_link "delete_#{user.transactions.first.id}"
       }
-      it " should not show the 30th repeat of this transaction)" do
+      it " should not show the 3rd repeat of this transaction)" do
         expect(page).not_to have_content("2020-05-29 repeating transaction"); #nearest business day
         expect(page).not_to have_content("2020-06-15 repeating transaction");
         expect(page).not_to have_content("2020-06-30 repeating transaction");

@@ -85,6 +85,7 @@ class TransactionsController < ApplicationController
 	def destroy
 		
 		delete_repeating_transactions(Transaction.find(params[:id]))
+		
 		Transaction.find(params[:id]).destroy
 		redirect_to :back
 		
@@ -146,37 +147,39 @@ class TransactionsController < ApplicationController
 					 end
 
 				when "semi-monthly"
+					working_date = transaction.transaction_date+3.days
 					(0..5).each do |i|
 
-						new_date = transaction.transaction_date+i.months;
 
-
-						middle_of_new_month = new_date.change(day: 15);
-						if middle_of_new_month.wday == 0
-							middle_of_new_month = middle_of_new_month.change(day: 13)
+						middle_of_month = transaction.transaction_date.change(day: 15);
+						if middle_of_month.wday == 0
+							middle_of_month = middle_of_month.change(day: 13)
 						end
-						if middle_of_new_month.wday == 6
-							middle_of_new_month = middle_of_new_month.change(day: 14)
+						if middle_of_month.wday == 6
+							middle_of_month = middle_of_month.change(day: 14)
 						end
 
-						unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: middle_of_new_month).count > 0
+						
+						while working_date.day != 15 && working_date.day != working_date.change(day: -1).day
+							working_date = working_date+1.days;
+							puts working_date
+							# puts "working date has a day value of #{working_date.wday} "
+						end
+						adjusted_working_date = working_date
+						
+						if adjusted_working_date.wday == 0
+							adjusted_working_date = working_date-2.days
+						end
+						if adjusted_working_date.wday == 6
+							adjusted_working_date = working_date-1.days
+						end
+
+						working_date = working_date+1.days;
+
+
+						unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: adjusted_working_date).count > 0
 						   new_transaction = transaction.dup
-						   new_transaction.transaction_date = (middle_of_new_month).to_s
-						   new_transaction.save
-					   	end
-
-					   	#now the end of the new month
-					   	end_of_new_month = new_date.change(day: -1);
-						if end_of_new_month.wday == 0
-							end_of_new_month = end_of_new_month.change(day: -3)
-						end
-						if end_of_new_month.wday == 6
-							end_of_new_month = end_of_new_month.change(day: -2)
-						end
-
-						unless current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: end_of_new_month).count > 0
-						   new_transaction = transaction.dup
-						   new_transaction.transaction_date = (end_of_new_month).to_s
+						   new_transaction.transaction_date = (adjusted_working_date).to_s
 						   new_transaction.save
 					   	end
 
@@ -245,6 +248,45 @@ class TransactionsController < ApplicationController
 						   Transaction.find(transaction_to_destroy).destroy
 					   	end
 					 end
+				when "semi-monthly"
+					working_date = transaction.transaction_date+3.days
+					(0..5).each do |i|
+
+
+						middle_of_month = transaction.transaction_date.change(day: 15);
+						if middle_of_month.wday == 0
+							middle_of_month = middle_of_month.change(day: 13)
+						end
+						if middle_of_month.wday == 6
+							middle_of_month = middle_of_month.change(day: 14)
+						end
+
+						
+						while working_date.day != 15 && working_date.day != working_date.change(day: -1).day
+							working_date = working_date+1.days;
+							puts working_date
+							# puts "working date has a day value of #{working_date.wday} "
+						end
+						adjusted_working_date = working_date
+						
+						if adjusted_working_date.wday == 0
+							adjusted_working_date = working_date-2.days
+						end
+						if adjusted_working_date.wday == 6
+							adjusted_working_date = working_date-1.days
+						end
+
+						working_date = working_date+1.days;
+
+						unless  current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: adjusted_working_date).count == 0
+						   transaction_to_destroy = current_user.transactions.where(type_of: transaction.type_of, amount: transaction.amount , name: transaction.name , transaction_date: adjusted_working_date)
+						   Transaction.find(transaction_to_destroy).destroy
+					   	end
+
+
+
+
+					end
 
 				when "monthly"
 					(1..3).each do |i|
