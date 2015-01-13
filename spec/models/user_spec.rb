@@ -32,18 +32,18 @@ describe User do
 
 
 	describe "next payment date" do
-		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date: "2014-12-25") }
+		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date: "2015-12-25") }
 
 		it {should respond_to(:next_paydate)}
-		its(:next_paydate) { should eq Date.parse "2014-12-25"  }
+		its(:next_paydate) { should eq Date.parse "2015-12-25"  }
 
 	end
 
 	describe "if there is a paydate before today" do
 
-		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date: "2014-12-25") }
+		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date: "2015-12-25") }
 		before { @user.transactions.create(name: "Payroll", amount: 100 , transaction_date:  (Time.now-5.days).to_s )}
-		its(:next_paydate) { should eq Date.parse "2014-12-25"  }
+		its(:next_paydate) { should eq Date.parse "2015-12-25"  }
 	end
 
 	describe "if there is no payment date" do

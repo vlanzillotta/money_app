@@ -7,7 +7,8 @@ class Transaction < ActiveRecord::Base
 	validates_inclusion_of :repeat_frequency, :in => [
 		"daily", 
 		"weekly", 
-		"bi-weekly", 
+		"bi-weekly",
+		"semi-monthly", 
 		"monthly", ""], 
 		:allow_nil => true
 
